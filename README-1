@@ -1,0 +1,28 @@
+MemOS by Joe Zhou
+jzhou94@bu.edu
+	 
+
+MemOS First Deliverable:	 
+	 
+Files:
+
+memos-1.s:
+Uses BIOS Interrupt 15h function 0xE801 to determine amount of available
+	 memory, and use BIOS Interrupt 10h function 0Eh to print to screen
+
+memos-1.ld:
+Linker script that allows memos-1.s to be linked to master boot record
+	of virtual disk by setting the file to start at memory address 0x7C00
+
+
+To assemble: as --32 memos-1.s -o memos-1.o
+To link to MBR: ld -T memos-1.ld memos-1.o -o memos-1
+(or use MakeFile)
+
+To test:
+qemu-system-i386 -hda memos-1 -m XXX(memory size) -vnc :1 &
+/root/vnc/opt/TigerVNC/bin/vncviewer :1
+
+To unbind socked: kill -9 XXX (process number)
+
+Resources: Lecture notes, OSDev, Piazza, uruk, VGA16 and other examples
